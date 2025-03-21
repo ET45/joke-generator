@@ -2,7 +2,11 @@ import React from "react";
 import { Button } from "@progress/kendo-react-buttons";
 import "../styles/CategorySelector.css";
 
-const categories = ["Country", "Dad Jokes", "Dark Humor"];
+const categories = [
+  { label: "Country", emoji: "🌍" },
+  { label: "Dad Jokes", emoji: "👨‍🦳" },
+  { label: "Dark Humor", emoji: "🌑" }
+];
 
 export const CategorySelector = ({ activeCategory, setActiveCategory, keyword, setKeyword }) => {
   const toggleCategory = (category) => {
@@ -17,15 +21,15 @@ export const CategorySelector = ({ activeCategory, setActiveCategory, keyword, s
 
   return (
     <div className="category-selector">
-      {categories.map((category) => (
-        <Button
-          key={category}
-          onClick={() => toggleCategory(category)}
-          className={`category-button ${activeCategory === category ? "active" : ""}`}
-        >
-          {category}
-        </Button>
-      ))}
+     {categories.map(({ label, emoji }) => (
+  <Button
+    key={label}
+    onClick={() => toggleCategory(label)}
+    className={`category-button ${activeCategory === label ? "active" : ""}`}
+  >
+    {emoji} {label}
+  </Button>
+))}
     </div>
   );
 };
