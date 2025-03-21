@@ -14,17 +14,18 @@ const JokeGenerator = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Clean");
 
-  const handleFetchJoke = async () => {
+  const handleFetchJoke = async (category = activeCategory, topic = keyword) => {
     setLoading(true);
     setNotification(null);
 
     try {
-      const jokeResponse = await fetchJoke(activeCategory, keyword);
+      const jokeResponse = await fetchJoke(category, topic);
       setJoke(jokeResponse);
       setShowDialog(true);
     } catch (error) {
       setNotification({ type: "error", message: "Failed to fetch a joke. Try again!" });
     }
+
     setLoading(false);
   };
 
