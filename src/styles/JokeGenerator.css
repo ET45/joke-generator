@@ -1,11 +1,20 @@
-.joke-generator-container {
-    background: #121212;
+html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .joke-generator-container {
+    position: relative;
+    background: transparent;
     color: white;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
   }
+  
   
   .joke-card {
     width: 450px;
@@ -17,12 +26,76 @@
   }
   
   .joke-title {
-    font-size: 22px;
+    font-size: 32px;
     font-weight: bold;
+    margin-bottom: 10px;
+    animation: popIn 1s ease;
+  }
+  
+  @keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
   }
   
   .joke-avatar {
     margin: 10px auto;
     font-size: 30px;
+  }
+  
+  .floating-emojis {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .emoji {
+    position: absolute;
+    top: 100%;
+    font-size: 2rem;
+    animation-name: float;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    opacity: 0.8;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-120vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  @keyframes popBounce {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    80% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .joke-card {
+    animation: popBounce 0.6s ease;
+    transition: transform 0.3s ease;
+  }
+  .joke-card:hover {
+    transform: scale(1.02);
   }
   

@@ -3,18 +3,27 @@
     justify-content: center;
     gap: 10px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
   }
   
   .category-button {
     background: #333;
     color: white;
-    border-radius: 5px;
+    border-radius: 999px;
     padding: 8px 15px;
     font-weight: bold;
     font-size: 14px;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  
+  .category-button:hover {
+    background: #555;
   }
   
   .category-button.active {
-    background: #0078D4;
+    background: #a66cff; /* New soft violet */
+    color: white;
+    transform: scale(1.05);
   }
   

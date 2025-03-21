@@ -1,13 +1,56 @@
-.joke-dialog {
+.custom-joke-dialog {
+    position: absolute;
+    top: calc(50% + 230px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: fadeInJoke 0.6s ease forwards;
+  }
+  
+  .joke-bubble {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 20px;
+    width: 360px;
     text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    border: 2px solid #444;
+    position: relative;
   }
   
   .joke-text {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 10px;
   }
   
   .close-button {
-    margin-top: 10px;
+    margin-top: 12px;
+    background: #a66cff; /* match your theme */
+    color: white;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-weight: bold;
+    border: none;
+    font-size: 14px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  
+  .close-button:hover {
+    background: #bf8cff; /* slightly lighter on hover */
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  
+  
+  @keyframes fadeInJoke {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
   }
   
