@@ -38,8 +38,14 @@ const JokeGenerator = () => {
           <CardTitle className="joke-title">Joke Generator</CardTitle>
           <Avatar type="image" size="large" shape="circle" className="joke-avatar">😂</Avatar>
 
-          <JokeInput keyword={keyword} setKeyword={setKeyword} />
-          <CategorySelector activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+          <JokeInput keyword={keyword} setKeyword={setKeyword} clearCategory={() => setActiveCategory(null)} />
+          <CategorySelector
+  activeCategory={activeCategory}
+  setActiveCategory={setActiveCategory}
+  keyword={keyword}
+  setKeyword={setKeyword}
+/>
+
           <JokeButton handleFetchJoke={handleFetchJoke} loading={loading} />
 
           {loading && <LoaderComponent />}
