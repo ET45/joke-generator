@@ -1,0 +1,28 @@
+.joke-generator-container {
+    background: #121212;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .joke-card {
+    width: 450px;
+    background: #1E1E1E;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .joke-title {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .joke-avatar {
+    margin: 10px auto;
+    font-size: 30px;
+  }
+  

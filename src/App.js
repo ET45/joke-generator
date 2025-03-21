@@ -7,6 +7,7 @@ import { CategorySelector } from "./components/CategorySelector";
 import { JokeInput } from "./components/JokeInput";
 import { JokeButton } from "./components/JokeButton";
 import { fetchJoke } from "./services/jokeService";
+import "./styles/JokeGenerator.css";  // Importing the styles
 
 const JokeGenerator = () => {
   const [joke, setJoke] = useState("");
@@ -31,11 +32,11 @@ const JokeGenerator = () => {
   };
 
   return (
-    <div style={{ background: "#121212", color: "white", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <Card style={{ width: "450px", background: "#1E1E1E", color: "white", padding: "20px", borderRadius: "10px", textAlign: "center" }}>
+    <div className="joke-generator-container">
+      <Card className="joke-card">
         <CardBody>
-          <CardTitle style={{ fontSize: "22px", fontWeight: "bold" }}>Joke Generator</CardTitle>
-          <Avatar type="image" size="large" shape="circle" style={{ margin: "10px auto", fontSize: "30px" }}>😂</Avatar>
+          <CardTitle className="joke-title">Joke Generator</CardTitle>
+          <Avatar type="image" size="large" shape="circle" className="joke-avatar">😂</Avatar>
 
           <JokeInput keyword={keyword} setKeyword={setKeyword} />
           <CategorySelector activeCategory={activeCategory} setActiveCategory={setActiveCategory} />

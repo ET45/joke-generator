@@ -1,13 +1,14 @@
 import React from "react";
 import { Dialog } from "@progress/kendo-react-dialogs";
 import { Button } from "@progress/kendo-react-buttons";
+import "../styles/JokeDialog.css";
 
 export const JokeDialog = ({ joke, setShowDialog }) => {
   return (
-    <Dialog>
+    <Dialog className="joke-dialog">
       <p>A JOKE</p>
-      <p style={{ fontSize: "18px", fontWeight: "bold" }}>{joke}</p>
-      <Button onClick={() => setShowDialog(false)} primary style={{ marginTop: "10px" }}>Close</Button>
+      <p className="joke-text">{joke}</p>
+      <Button onClick={() => setShowDialog(false)} primary className="close-button">Close</Button>
     </Dialog>
   );
 };
