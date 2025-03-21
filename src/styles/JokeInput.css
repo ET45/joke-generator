@@ -1,8 +1,23 @@
-.joke-input {
+.joke-input-wrapper {
+    position: relative;
     margin-bottom: 15px;
-    background: #333;
+  }
+  
+  
+  
+  .joke-input {
+    padding-left: 10px !important;
+    background: #2a2a2a;
     color: white;
-    border-radius: 5px;
-    padding: 10px;
+    border: 2px solid #444;
+    border-radius: 12px;
+    height: 45px;
+    font-size: 14px;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .joke-input:focus {
+    border-color: #a66cff;
+    box-shadow: 0 0 0 2px rgba(166, 108, 255, 0.3);
   }
   

@@ -29,9 +29,11 @@ export const JokeCard = ({
         setActiveCategory={setActiveCategory}
         keyword={keyword}
         setKeyword={setKeyword}
+        handleFetchJoke={handleFetchJoke} 
       />
 
-      <JokeButton handleFetchJoke={handleFetchJoke} loading={loading} />
+<JokeButton handleFetchJoke={handleFetchJoke} loading={loading} />
+
 
       {loading && <LoaderComponent />}
     </CardBody>

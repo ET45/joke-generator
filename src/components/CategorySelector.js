@@ -8,28 +8,37 @@ const categories = [
   { label: "Dark Humor", emoji: "🌑" }
 ];
 
-export const CategorySelector = ({ activeCategory, setActiveCategory, keyword, setKeyword }) => {
-  const toggleCategory = (category) => {
-    if (keyword) setKeyword(""); 
+export const CategorySelector = ({
+  activeCategory,
+  setActiveCategory,
+  keyword,
+  setKeyword,
+  handleFetchJoke,
+}) => {
 
-    if (activeCategory === category) {
-      setActiveCategory(null); 
+  const toggleCategory = (category) => {
+    const isSame = activeCategory === category;
+
+    if (!isSame) {
+      setKeyword("");
+      setActiveCategory(category);
+      handleFetchJoke(category); 
     } else {
-      setActiveCategory(category); 
+      setActiveCategory(null);
     }
   };
 
   return (
     <div className="category-selector">
-     {categories.map(({ label, emoji }) => (
-  <Button
-    key={label}
-    onClick={() => toggleCategory(label)}
-    className={`category-button ${activeCategory === label ? "active" : ""}`}
-  >
-    {emoji} {label}
-  </Button>
-))}
+      {categories.map(({ label, emoji }) => (
+        <Button
+          key={label}
+          onClick={() => toggleCategory(label)}
+          className={`category-button ${activeCategory === label ? "active" : ""}`}
+        >
+          {emoji} {label}
+        </Button>
+      ))}
     </div>
   );
 };
