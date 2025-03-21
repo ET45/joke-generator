@@ -1,0 +1,13 @@
+.joke-dialog {
+    text-align: center;
+  }
+  
+  .joke-text {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .close-button {
+    margin-top: 10px;
+  }
+  

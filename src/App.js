@@ -1,64 +1,53 @@
 import React, { useState } from "react";
-import { Button } from "@progress/kendo-react-buttons";
-import { Input } from "@progress/kendo-react-inputs";
-import { Card, CardBody, CardTitle } from "@progress/kendo-react-layout";
+import { Card, CardBody, CardTitle, Avatar } from "@progress/kendo-react-layout";
+import { LoaderComponent } from "./components/LoaderComponent";
+import { NotificationComponent } from "./components/NotificationComponent";
+import { JokeDialog } from "./components/JokeDialog";
+import { CategorySelector } from "./components/CategorySelector";
+import { JokeInput } from "./components/JokeInput";
+import { JokeButton } from "./components/JokeButton";
+import { fetchJoke } from "./services/jokeService";
+import "./styles/JokeGenerator.css";  // Importing the styles
 
 const JokeGenerator = () => {
   const [joke, setJoke] = useState("");
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Clean");
 
-
-  const fetchJoke = async () => {
+  const handleFetchJoke = async () => {
     setLoading(true);
+    setNotification(null);
+
     try {
-      const response = await fetch("https://api.cohere.ai/v1/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_COHERE_API_KEY}`,
-        },
-        body: JSON.stringify({
-          model: "command-r-plus", 
-          prompt: `Tell me a funny joke about ${keyword || "anything"}.`,
-          max_tokens: 50,
-        }),
-      });
-  
-      const responseText = await response.text();
-      console.log("Full Response:", responseText);
-  
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText} - ${responseText}`);
-      }
-  
-      const data = JSON.parse(responseText);
-      setJoke(data.generations[0]?.text.trim() || "Couldn't generate a joke.");
+      const jokeResponse = await fetchJoke(activeCategory, keyword);
+      setJoke(jokeResponse);
+      setShowDialog(true);
     } catch (error) {
-      console.error("Error fetching joke:", error);
-      setJoke(`Failed to fetch a joke. Error: ${error.message}`);
+      setNotification({ type: "error", message: "Failed to fetch a joke. Try again!" });
     }
     setLoading(false);
   };
-  
 
   return (
-    <div className="k-d-flex k-justify-content-center k-align-items-center k-flex-column" style={{ minHeight: "100vh" }}>
-      <Card style={{ width: "400px", textAlign: "center" }}>
+    <div className="joke-generator-container">
+      <Card className="joke-card">
         <CardBody>
-          <CardTitle>Joke Generator</CardTitle>
-          <Input
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-            placeholder="Enter a topic (optional)"
-            style={{ marginBottom: "10px" }}
-          />
-          <Button onClick={fetchJoke} disabled={loading} primary>
-            {loading ? "Generating..." : "Get Joke"}
-          </Button>
-          {joke && <p style={{ marginTop: "10px" }}>{joke}</p>}
+          <CardTitle className="joke-title">Joke Generator</CardTitle>
+          <Avatar type="image" size="large" shape="circle" className="joke-avatar">😂</Avatar>
+
+          <JokeInput keyword={keyword} setKeyword={setKeyword} />
+          <CategorySelector activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+          <JokeButton handleFetchJoke={handleFetchJoke} loading={loading} />
+
+          {loading && <LoaderComponent />}
         </CardBody>
       </Card>
+
+      {notification && <NotificationComponent type={notification.type} message={notification.message} />}
+      {showDialog && <JokeDialog joke={joke} setShowDialog={setShowDialog} />}
     </div>
   );
 };
